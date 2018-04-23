@@ -101,7 +101,7 @@
 
 
 
-  <meta name="keywords" content="yuhongwa, blog" />
+  <meta name="keywords" content="linux,内核,系统调用," />
 
 
 
@@ -114,16 +114,26 @@
 
 
 
-<meta name="description" content="那过剩的未来 幸福与否 仍属未知比起有限的过去 还是选择现在向上奋起吧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="hongiii">
-<meta property="og:url" content="http://www.yuhongwa.com/tags/linux/index.html">
+<meta name="description" content="系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤：  下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在ker">
+<meta name="keywords" content="linux,内核,系统调用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux内核：增加系统调用">
+<meta property="og:url" content="http://www.yuhongwa.com/2018/04/22/Linux内核：增加系统调用/index.html">
 <meta property="og:site_name" content="hongiii">
-<meta property="og:description" content="那过剩的未来 幸福与否 仍属未知比起有限的过去 还是选择现在向上奋起吧">
+<meta property="og:description" content="系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤：  下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在ker">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n1.PNG?raw=true">
+<meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n2.PNG?raw=true">
+<meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n3.PNG?raw=true">
+<meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n4.PNG?raw=true">
+<meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n5.PNG?raw=true">
+<meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/N6.PNG?raw=true">
+<meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/N7.PNG?raw=true">
+<meta property="og:updated_time" content="2018-04-23T09:31:50.450Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hongiii">
-<meta name="twitter:description" content="那过剩的未来 幸福与否 仍属未知比起有限的过去 还是选择现在向上奋起吧">
+<meta name="twitter:title" content="Linux内核：增加系统调用">
+<meta name="twitter:description" content="系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤：  下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在ker">
+<meta name="twitter:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n1.PNG?raw=true">
 
 
 
@@ -153,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://www.yuhongwa.com/tags/linux/"/>
+  <link rel="canonical" href="http://www.yuhongwa.com/2018/04/22/Linux内核：增加系统调用/"/>
 
 
 
 
 
-  <title>标签: linux | hongiii</title>
+  <title>Linux内核：增加系统调用 | hongiii</title>
   
 
 
@@ -178,7 +188,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -316,82 +326,286 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>linux<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yuhongwa.com/2018/04/22/Linux内核：增加系统调用/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuhong Wa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lys.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hongiii">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/22/Linux内核：增加系统调用/" itemprop="url">
-              
-                <span itemprop="name">Linux内核：增加系统调用</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">Linux内核：增加系统调用</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-22T21:55:00+08:00"
-              content="2018-04-22" >
-          04-22
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-22T21:55:00+08:00">
+                2018-04-22
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  717
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/02/内核编译错误/" itemprop="url">
-              
-                <span itemprop="name">ubuntu make menuconfig error</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-02T21:49:00+08:00"
-              content="2018-03-02" >
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <script src="\assets\js\APlayer.min.js"> </script><p>系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。<br>本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。<br>主要有以下6个步骤：</p>
+<ul>
+<li>下载并解压内核、生成<code>.config</code>配置文件</li>
+<li>在<code>arch/x86/entry/syscalls/syscall_64.tbl</code>中添加系统调用号</li>
+<li>在<code>kernel/sys.c</code>中添加系统调用程序</li>
+<li>在<code>include/linux/syscalls.h</code>中添加相应的声明</li>
+<li>编译内核、安装内核</li>
+<li>重启并测试</li>
+</ul>
+<h3 id="下载并解压内核、生成-config配置文件"><a href="#下载并解压内核、生成-config配置文件" class="headerlink" title="下载并解压内核、生成.config配置文件"></a>下载并解压内核、生成<code>.config</code>配置文件</h3><h4 id="下载并解压内核"><a href="#下载并解压内核" class="headerlink" title="下载并解压内核"></a>下载并解压内核</h4><p>在<a href="https://mirrors.tuna.tsinghua.edu.cn/kernel/" target="_blank" rel="noopener">清华镜像</a>下载linux-4.6.3，解压至/usr/src，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -xvf linux-4.6.3.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p>进入该文件夹，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/src/linux-4.6.3</span><br></pre></td></tr></table></figure></p>
+<h4 id="生成-config配置文件"><a href="#生成-config配置文件" class="headerlink" title="生成.config配置文件"></a>生成<code>.config</code>配置文件</h4><p><b><code>.config</code>文件是Linux内核的配置文件，执行<code>make bzImage</code>生成新内核的时候，顶层的Makefile文件会读取<code>.config</code>文件中的内容，根据这个文件编译定制的内核。</b><br>首先将原来的配置文件拷贝过来，到/usr/src文件夹下，使用<code>uname -r</code>查看内核版本，当前的Ubuntu内核版本是4.10.0-30，配置文件是<code>/usr/src/linux-headers-4.10.0-30-generic/.config 这个文件</code>，执行如下命令生成临时.config配置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/src/linux-headers-4.10.0-30-generic/.config .config</span><br></pre></td></tr></table></figure></p>
+<h4 id="其他安装"><a href="#其他安装" class="headerlink" title="其他安装"></a>其他安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libssl-dev</span><br><span class="line">sudo apt-get install libncurses5-dev</span><br></pre></td></tr></table></figure>
+<p>其中<code>libncurses5-dev</code>安装menuconfig，与屏幕显示和游标移动相关。</p>
+<h3 id="添加系统调用号"><a href="#添加系统调用号" class="headerlink" title="添加系统调用号"></a>添加系统调用号</h3><p>在<code>arch/x86/entry/syscalls/syscall_64.tbl</code>文件中，向最后一行添加自己的系统调用，如下<img src="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n1.PNG?raw=true" alt="image"><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">546   common    lsproc      sys_lsproc</span><br></pre></td></tr></table></figure></p>
+<h3 id="添加系统调用程序"><a href="#添加系统调用程序" class="headerlink" title="添加系统调用程序"></a>添加系统调用程序</h3><p>在<code>kernel/sys.c</code>文件中，添加系统调用程序，<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">asmlinkage <span class="keyword">int</span> <span class="title">sys_lsproc</span> <span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(<span class="string">"Hi, this is yuhong's syscall\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n2.PNG?raw=true" alt="image"></p>
+<h3 id="添加相应声明"><a href="#添加相应声明" class="headerlink" title="添加相应声明"></a>添加相应声明</h3><p>在<code>include/linux/syscalls.h</code>中添加函数声明，<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">asmlinkage <span class="keyword">int</span> <span class="title">sys_lsproc</span><span class="params">(<span class="keyword">int</span> num)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n3.PNG?raw=true" alt="image"></p>
+<h3 id="编译内核、安装内核"><a href="#编译内核、安装内核" class="headerlink" title="编译内核、安装内核"></a>编译内核、安装内核</h3><p>执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make menuconfig</span><br></pre></td></tr></table></figure></p>
+<p>选择Load，然后Ok，保存并退出。<br><img src="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n4.PNG?raw=true" alt="image"><br><img src="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n5.PNG?raw=true" alt="image"><br>然后依次执行，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">make bzImage //生成新内核</span><br><span class="line">make modules //编译模块</span><br><span class="line">make modules_install //安装模块</span><br><span class="line">make install //安装内核</span><br></pre></td></tr></table></figure></p>
+<h3 id="重启并测试"><a href="#重启并测试" class="headerlink" title="重启并测试"></a>重启并测试</h3><p>安装完成之后重启虚拟机，按ESC进入Ubuntu Grub界面，选择高级选项，选择4.6.3内核。<br>新建测试文件test.c，内容为：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/syscall.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    syscall(<span class="number">546</span>, <span class="number">1</span>); <span class="comment">//依次是调用号和参数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译并运行，输出<br><img src="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/N6.PNG?raw=true" alt="image"><br>这里提示implicit declaration of function ‘syscall’，经查暂无果。<code>dmesg</code>查看系统缓冲区以获取最近输出的诊断消息并在标准输出中输出这些消息。<br><img src="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/N7.PNG?raw=true" alt="image"> </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div align="center">
+ 
+   <div class="">
+   <p><span>
+   <b>本文地址：</b><a href="/2018/04/22/Linux内核：增加系统调用/" title="Linux内核：增加系统调用">http://www.yuhongwa.com/2018/04/22/Linux内核：增加系统调用/</a><br/><b>转载请注明出处，谢谢！</b>
+   </span></p>
+   </div>
+ 
+</div>
+
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持分享，您的支持将鼓励我继续学习哇~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yuhong Wa 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/内核/" rel="tag"># 内核</a>
+          
+            <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/02/内核编译错误/" rel="next" title="ubuntu make menuconfig error">
+                <i class="fa fa-chevron-left"></i> ubuntu make menuconfig error
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -399,6 +613,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
         </div>
         
           
@@ -418,8 +639,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -535,6 +765,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并解压内核、生成-config配置文件"><span class="nav-number">1.</span> <span class="nav-text">下载并解压内核、生成.config配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载并解压内核"><span class="nav-number">1.1.</span> <span class="nav-text">下载并解压内核</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成-config配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">生成.config配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他安装"><span class="nav-number">1.3.</span> <span class="nav-text">其他安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加系统调用号"><span class="nav-number">2.</span> <span class="nav-text">添加系统调用号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加系统调用程序"><span class="nav-number">3.</span> <span class="nav-text">添加系统调用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加相应声明"><span class="nav-number">4.</span> <span class="nav-text">添加相应声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译内核、安装内核"><span class="nav-number">5.</span> <span class="nav-text">编译内核、安装内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启并测试"><span class="nav-number">6.</span> <span class="nav-text">重启并测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -679,6 +925,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -702,6 +952,10 @@
   
     
 
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2155263"></script>
+      <!-- UY END -->
     
   
 

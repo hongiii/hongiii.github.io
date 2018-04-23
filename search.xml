@@ -8,7 +8,7 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>linux</tag>
+        <tag>Linux</tag>
         <tag>内核</tag>
         <tag>系统调用</tag>
       </tags>
@@ -18,11 +18,11 @@
     <url>%2F2018%2F03%2F02%2F%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%2F</url>
     <content type="text"><![CDATA[1234567891011root@ubuntu:/home/linux/linux-4.15.6# make menuconfig *** Unable to find the ncurses libraries or the *** required header files. *** 'make menuconfig' requires the ncurses libraries. *** *** Install ncurses (ncurses-devel) and try again. ***scripts/kconfig/Makefile:202: recipe for target 'scripts/kconfig/dochecklxdialog' failedmake[1]: *** [scripts/kconfig/dochecklxdialog] Error 1Makefile:505: recipe for target 'menuconfig' failedmake: *** [menuconfig] Error 2 solution:1apt-get install libncurses5 libncurses5-dev]]></content>
       <categories>
-        <category>linux</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>linux</tag>
-        <tag>ubuntu</tag>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
         <tag>内核编译</tag>
       </tags>
   </entry>

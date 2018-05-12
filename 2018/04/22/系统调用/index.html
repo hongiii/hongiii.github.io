@@ -101,7 +101,7 @@
 
 
 
-  <meta name="keywords" content="yuhongwa, blog" />
+  <meta name="keywords" content="Linux,中断,系统调用," />
 
 
 
@@ -114,16 +114,18 @@
 
 
 
-<meta name="description" content="那过剩的未来 幸福与否 仍属未知比起有限的过去 还是选择现在向上奋起吧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="hongiii">
-<meta property="og:url" content="http://www.yuhongwa.com/archives/2018/index.html">
+<meta name="description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。 在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80">
+<meta name="keywords" content="Linux,中断,系统调用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统调用">
+<meta property="og:url" content="http://www.yuhongwa.com/2018/04/22/系统调用/index.html">
 <meta property="og:site_name" content="hongiii">
-<meta property="og:description" content="那过剩的未来 幸福与否 仍属未知比起有限的过去 还是选择现在向上奋起吧">
+<meta property="og:description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。 在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-12T13:46:53.061Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hongiii">
-<meta name="twitter:description" content="那过剩的未来 幸福与否 仍属未知比起有限的过去 还是选择现在向上奋起吧">
+<meta name="twitter:title" content="Linux系统调用">
+<meta name="twitter:description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。 在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80">
 
 
 
@@ -153,13 +155,13 @@
 
 
 
-  <link rel="canonical" href="http://www.yuhongwa.com/archives/2018/"/>
+  <link rel="canonical" href="http://www.yuhongwa.com/2018/04/22/系统调用/"/>
 
 
 
 
 
-  <title>归档 | hongiii</title>
+  <title>Linux系统调用 | hongiii</title>
   
 
 
@@ -178,7 +180,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -316,222 +318,269 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yuhongwa.com/2018/04/22/系统调用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yuhong Wa">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/lys.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hongiii">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h2 class="post-title" itemprop="name headline">Linux系统调用</h2>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-22T21:55:00+08:00">
+                2018-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 5 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2018">2018</h2>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/22/系统调用/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">Linux系统调用</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  843
+                </span>
               
-            </a>
-        
-      </h3>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-22T21:55:00+08:00"
-              content="2018-04-22" >
-          04-22
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/22/Linux内核：增加系统调用/" itemprop="url">
-              
-                <span itemprop="name">Linux内核：增加系统调用</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-22T21:55:00+08:00"
-              content="2018-04-22" >
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/02/内核编译错误/" itemprop="url">
-              
-                <span itemprop="name">ubuntu make menuconfig error</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-02T21:49:00+08:00"
-              content="2018-03-02" >
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <script src="\assets\js\APlayer.min.js"> </script><h3 id="系统调用基本原理"><a href="#系统调用基本原理" class="headerlink" title="系统调用基本原理"></a>系统调用基本原理</h3><p>系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。</p>
+<p>在i386体系中，Linux系统调用接口是通过软中断指令<code>int 0x80</code>使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令<code>int 0x80</code>的时候，这个指令会发生一个中断向量码为128的中断请求，并在响应过程中将进程从用户态切换为内核态。</p>
+<p>通过软中断<code>0x80</code>，系统会跳转到一个预设好的内核空间地址，它指向了系统调用处理程序，即在entry.S文件中的system_call函数。也就是，所有的系统调用都会统一跳转到这个地址执行system_call()函数。</p>
+<p>因为Linux只允许系统调用接口使用128这一个中断向量，并在中断号为128的中断服务例程中，调用不同调用不同的内核服务例程，所以，系统调用接口除了要引发<code>int 0x80</code>软中断外，为了进入内河后调用不同的内核服务例程，还需要提供识别内核服务例程的参数，称之为“系统调用号”。</p>
+<p>每个系统调用都有对应的系统调用号，同时内核中有一个system_call_table数组，它是个函数指针数组，每个函数指针都指向了系统调用的服务例程，下标就是该内核服务例程的系统调用号，用以指明到底执行哪个系统调用。当<code>int 0x80</code>软中断执行时，系统调用号会放入<code>eax</code>寄存器中，system_call函数可以读取<code>eax</code>寄存器获得系统调用号，将其乘以4得到偏移地址，以sys_call_table为基地址，基地址加上偏移地址就是应该执行的系统调用服务例程（内核服务例程）的地址。</p>
+<h3 id="系统调用参数传递"><a href="#系统调用参数传递" class="headerlink" title="系统调用参数传递"></a>系统调用参数传递</h3><p>参数依次存放在寄存器<code>eax</code>、<code>ebx</code>、<code>ecx</code>、<code>edx</code>、<code>esi</code>中，当系统调用的参数大于5个时（因为上面5个寄存器用完了），执行<code>int 0x80</code>执行仍需将系统调用功能号保存在<code>eax</code>中，所不同的只是参数应该依次存放在一块连续的内存区域内，同时在寄存器<code>eax</code>中保存指向该内存区域的指针。系统调用完成后，返回值仍将保存在寄存器<code>eax</code>中。由于只是需要一块连续的内存区域来保存系统调用的参数，因此可以完全像普通函数调用一样使用栈（Stack）来传递系统调用所需的参数。但是，注意参数以相反的顺序进栈，先进后出，即应该最后一个参数先进栈，第一个参数最后进栈。如果采用栈来传递系统调用所需要的参数，在执行<code>int $0x80</code>指令时还应该将栈指针的当前值复制到寄存器<code>ebx</code>中。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/23/Git笔记/" itemprop="url">
-              
-                <span itemprop="name">Git笔记</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-23T03:50:00+08:00"
-              content="2018-01-23" >
-          01-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/19/使用Hexo-GitHub-Pages搭建个人博客/" itemprop="url">
-              
-                <span itemprop="name">使用Hexo+GitHub Pages搭建个人博客</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-19T00:56:00+08:00"
-              content="2018-01-19" >
-          01-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div align="center">
+ 
+   <div class="">
+   <p><span>
+   <b>本文地址：</b><a href="/2018/04/22/系统调用/" title="Linux系统调用">http://www.yuhongwa.com/2018/04/22/系统调用/</a><br/><b>转载请注明出处，谢谢！</b>
+   </span></p>
+   </div>
+ 
+</div>
+
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持分享，您的支持将鼓励我继续学习哇~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yuhong Wa 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/中断/" rel="tag"># 中断</a>
+          
+            <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/22/Linux内核：增加系统调用/" rel="next" title="Linux内核：增加系统调用">
+                <i class="fa fa-chevron-left"></i> Linux内核：增加系统调用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -539,6 +588,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+
+  
         </div>
         
           
@@ -558,8 +614,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -675,6 +740,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用基本原理"><span class="nav-number">1.</span> <span class="nav-text">系统调用基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用参数传递"><span class="nav-number">2.</span> <span class="nav-text">系统调用参数传递</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -819,6 +900,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -842,6 +927,10 @@
   
     
 
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2155263"></script>
+      <!-- UY END -->
     
   
 

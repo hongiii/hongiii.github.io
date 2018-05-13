@@ -101,13 +101,13 @@
 
 
 
-  <meta name="keywords" content="Linux,系统调用,内核," />
+  <meta name="keywords" content="Linux,内核,系统调用," />
 
 
 
 
 
-  <link rel="alternate" href="/atom.xml" title="hongiii" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="Solanine" type="application/atom+xml" />
 
 
 
@@ -115,11 +115,11 @@
 
 
 <meta name="description" content="系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤：  下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在ker">
-<meta name="keywords" content="Linux,系统调用,内核">
+<meta name="keywords" content="Linux,内核,系统调用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核：增加系统调用">
 <meta property="og:url" content="http://www.yuhongwa.com/2018/04/22/Linux内核：增加系统调用/index.html">
-<meta property="og:site_name" content="hongiii">
+<meta property="og:site_name" content="Solanine">
 <meta property="og:description" content="系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤：  下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在ker">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n1.PNG?raw=true">
@@ -169,7 +169,7 @@
 
 
 
-  <title>Linux内核：增加系统调用 | hongiii</title>
+  <title>Linux内核：增加系统调用 | Solanine</title>
   
 
 
@@ -199,12 +199,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">hongiii</span>
+        <span class="site-title">Solanine</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description">yuhong's blog</h1>
+        <h1 class="site-subtitle" itemprop="description">Solanine's blog</h1>
       
   </div>
 
@@ -349,7 +349,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hongiii">
+      <meta itemprop="name" content="Solanine">
     </span>
 
     
@@ -536,9 +536,9 @@
           
             <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
-          
             <a href="/tags/内核/" rel="tag"># 内核</a>
+          
+            <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
           
         </div>
       
@@ -551,8 +551,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/02/内核编译错误/" rel="next" title="ubuntu make menuconfig error">
-                <i class="fa fa-chevron-left"></i> ubuntu make menuconfig error
+              <a href="/2018/04/22/系统调用/" rel="next" title="Linux系统调用">
+                <i class="fa fa-chevron-left"></i> Linux系统调用
               </a>
             
           </div>
@@ -560,10 +560,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/22/系统调用/" rel="prev" title="Linux系统调用">
-                Linux系统调用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

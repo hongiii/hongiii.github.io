@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Linux系统调用]]></title>
-    <url>%2F2018%2F04%2F22%2F%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。 在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80的时候，这个指令会发生一个中断向量码为128的中断请求，并在响应过程中将进程从用户态切换为内核态。 通过软中断0x80，系统会跳转到一个预设好的内核空间地址，它指向了系统调用处理程序，即在entry.S文件中的system_call函数。也就是，所有的系统调用都会统一跳转到这个地址执行system_call()函数。 因为Linux只允许系统调用接口使用128这一个中断向量，并在中断号为128的中断服务例程中，调用不同调用不同的内核服务例程，所以，系统调用接口除了要引发int 0x80软中断外，为了进入内河后调用不同的内核服务例程，还需要提供识别内核服务例程的参数，称之为“系统调用号”。 每个系统调用都有对应的系统调用号，同时内核中有一个system_call_table数组，它是个函数指针数组，每个函数指针都指向了系统调用的服务例程，下标就是该内核服务例程的系统调用号，用以指明到底执行哪个系统调用。当int 0x80软中断执行时，系统调用号会放入eax寄存器中，system_call函数可以读取eax寄存器获得系统调用号，将其乘以4得到偏移地址，以sys_call_table为基地址，基地址加上偏移地址就是应该执行的系统调用服务例程（内核服务例程）的地址。 系统调用参数传递参数依次存放在寄存器eax、ebx、ecx、edx、esi中，当系统调用的参数大于5个时（因为上面5个寄存器用完了），执行int 0x80执行仍需将系统调用功能号保存在eax中，所不同的只是参数应该依次存放在一块连续的内存区域内，同时在寄存器eax中保存指向该内存区域的指针。系统调用完成后，返回值仍将保存在寄存器eax中。由于只是需要一块连续的内存区域来保存系统调用的参数，因此可以完全像普通函数调用一样使用栈（Stack）来传递系统调用所需的参数。但是，注意参数以相反的顺序进栈，先进后出，即应该最后一个参数先进栈，第一个参数最后进栈。如果采用栈来传递系统调用所需要的参数，在执行int $0x80指令时还应该将栈指针的当前值复制到寄存器ebx中。]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>中断</tag>
-        <tag>系统调用</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Linux内核：增加系统调用]]></title>
     <url>%2F2018%2F04%2F22%2FLinux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%2F</url>
     <content type="text"><![CDATA[系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤： 下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在kernel/sys.c中添加系统调用程序 在include/linux/syscalls.h中添加相应的声明 编译内核、安装内核 重启并测试 下载并解压内核、生成.config配置文件下载并解压内核在清华镜像下载linux-4.6.3，解压至/usr/src，1sudo tar -xvf linux-4.6.3.tar.gz 进入该文件夹，1cd /usr/src/linux-4.6.3 生成.config配置文件.config文件是Linux内核的配置文件，执行make bzImage生成新内核的时候，顶层的Makefile文件会读取.config文件中的内容，根据这个文件编译定制的内核。首先将原来的配置文件拷贝过来，到/usr/src文件夹下，使用uname -r查看内核版本，当前的Ubuntu内核版本是4.10.0-30，配置文件是/usr/src/linux-headers-4.10.0-30-generic/.config 这个文件，执行如下命令生成临时.config配置文件：1sudo cp /usr/src/linux-headers-4.10.0-30-generic/.config .config 其他安装12sudo apt-get install libssl-devsudo apt-get install libncurses5-dev 其中libncurses5-dev安装menuconfig，与屏幕显示和游标移动相关。 添加系统调用号在arch/x86/entry/syscalls/syscall_64.tbl文件中，向最后一行添加自己的系统调用，如下1546 common lsproc sys_lsproc 添加系统调用程序在kernel/sys.c文件中，添加系统调用程序，12345asmlinkage int sys_lsproc (int num)&#123; printk("Hi, this is yuhong's syscall\n"); return 1;&#125; 添加相应声明在include/linux/syscalls.h中添加函数声明，1asmlinkage int sys_lsproc(int num); 编译内核、安装内核执行1sudo make menuconfig 选择Load，然后Ok，保存并退出。然后依次执行，1234make bzImage //生成新内核make modules //编译模块make modules_install //安装模块make install //安装内核 重启并测试安装完成之后重启虚拟机，按ESC进入Ubuntu Grub界面，选择高级选项，选择4.6.3内核。新建测试文件test.c，内容为：12345678#include &lt;linux/unistd.h&gt;#include &lt;sys/syscall.h&gt;int main()&#123; syscall(546, 1); //依次是调用号和参数 return 0;&#125; 编译并运行，输出这里提示implicit declaration of function ‘syscall’，经查暂无果。dmesg查看系统缓冲区以获取最近输出的诊断消息并在标准输出中输出这些消息。]]></content>
@@ -22,8 +9,21 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-        <tag>系统调用</tag>
         <tag>内核</tag>
+        <tag>系统调用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux系统调用]]></title>
+    <url>%2F2018%2F04%2F22%2F%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80的时候，这个指令会发生一个中断向量码为128的中断请求，并在响应过程中将进程从用户态切换为内核态。通过软中断0x80，系统会跳转到一个预设好的内核空间地址，它指向了系统调用处理程序，即在entry.S文件中的system_call函数。也就是，所有的系统调用都会统一跳转到这个地址执行system_call()函数。因为Linux只允许系统调用接口使用128这一个中断向量，并在中断号为128的中断服务例程中，调用不同调用不同的内核服务例程，所以，系统调用接口除了要引发int 0x80软中断外，为了进入内河后调用不同的内核服务例程，还需要提供识别内核服务例程的参数，称之为“系统调用号”。每个系统调用都有对应的系统调用号，同时内核中有一个system_call_table数组，它是个函数指针数组，每个函数指针都指向了系统调用的服务例程，下标就是该内核服务例程的系统调用号，用以指明到底执行哪个系统调用。当int 0x80软中断执行时，系统调用号会放入eax寄存器中，system_call函数可以读取eax寄存器获得系统调用号，将其乘以4得到偏移地址，以sys_call_table为基地址，基地址加上偏移地址就是应该执行的系统调用服务例程（内核服务例程）的地址。 系统调用参数传递参数依次存放在寄存器eax、ebx、ecx、edx、esi中，当系统调用的参数大于5个时（因为上面5个寄存器用完了），执行int 0x80执行仍需将系统调用功能号保存在eax中，所不同的只是参数应该依次存放在一块连续的内存区域内，同时在寄存器eax中保存指向该内存区域的指针。系统调用完成后，返回值仍将保存在寄存器eax中。由于只是需要一块连续的内存区域来保存系统调用的参数，因此可以完全像普通函数调用一样使用栈（Stack）来传递系统调用所需的参数。但是，注意参数以相反的顺序进栈，先进后出，即应该最后一个参数先进栈，第一个参数最后进栈。如果采用栈来传递系统调用所需要的参数，在执行int $0x80指令时还应该将栈指针的当前值复制到寄存器ebx中。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>系统调用</tag>
+        <tag>中断</tag>
       </tags>
   </entry>
   <entry>

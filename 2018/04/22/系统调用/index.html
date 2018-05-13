@@ -101,31 +101,31 @@
 
 
 
-  <meta name="keywords" content="Linux,中断,系统调用," />
+  <meta name="keywords" content="Linux,系统调用,中断," />
 
 
 
 
 
-  <link rel="alternate" href="/atom.xml" title="hongiii" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="Solanine" type="application/atom+xml" />
 
 
 
 
 
 
-<meta name="description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。 在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80">
-<meta name="keywords" content="Linux,中断,系统调用">
+<meta name="description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80的">
+<meta name="keywords" content="Linux,系统调用,中断">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux系统调用">
 <meta property="og:url" content="http://www.yuhongwa.com/2018/04/22/系统调用/index.html">
-<meta property="og:site_name" content="hongiii">
-<meta property="og:description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。 在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80">
+<meta property="og:site_name" content="Solanine">
+<meta property="og:description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-12T13:46:53.061Z">
+<meta property="og:updated_time" content="2018-05-12T13:56:47.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux系统调用">
-<meta name="twitter:description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。 在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80">
+<meta name="twitter:description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80的">
 
 
 
@@ -161,7 +161,7 @@
 
 
 
-  <title>Linux系统调用 | hongiii</title>
+  <title>Linux系统调用 | Solanine</title>
   
 
 
@@ -191,12 +191,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">hongiii</span>
+        <span class="site-title">Solanine</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description">yuhong's blog</h1>
+        <h1 class="site-subtitle" itemprop="description">Solanine's blog</h1>
       
   </div>
 
@@ -341,7 +341,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="hongiii">
+      <meta itemprop="name" content="Solanine">
     </span>
 
     
@@ -452,12 +452,8 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><h3 id="系统调用基本原理"><a href="#系统调用基本原理" class="headerlink" title="系统调用基本原理"></a>系统调用基本原理</h3><p>系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。</p>
-<p>在i386体系中，Linux系统调用接口是通过软中断指令<code>int 0x80</code>使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令<code>int 0x80</code>的时候，这个指令会发生一个中断向量码为128的中断请求，并在响应过程中将进程从用户态切换为内核态。</p>
-<p>通过软中断<code>0x80</code>，系统会跳转到一个预设好的内核空间地址，它指向了系统调用处理程序，即在entry.S文件中的system_call函数。也就是，所有的系统调用都会统一跳转到这个地址执行system_call()函数。</p>
-<p>因为Linux只允许系统调用接口使用128这一个中断向量，并在中断号为128的中断服务例程中，调用不同调用不同的内核服务例程，所以，系统调用接口除了要引发<code>int 0x80</code>软中断外，为了进入内河后调用不同的内核服务例程，还需要提供识别内核服务例程的参数，称之为“系统调用号”。</p>
-<p>每个系统调用都有对应的系统调用号，同时内核中有一个system_call_table数组，它是个函数指针数组，每个函数指针都指向了系统调用的服务例程，下标就是该内核服务例程的系统调用号，用以指明到底执行哪个系统调用。当<code>int 0x80</code>软中断执行时，系统调用号会放入<code>eax</code>寄存器中，system_call函数可以读取<code>eax</code>寄存器获得系统调用号，将其乘以4得到偏移地址，以sys_call_table为基地址，基地址加上偏移地址就是应该执行的系统调用服务例程（内核服务例程）的地址。</p>
-<h3 id="系统调用参数传递"><a href="#系统调用参数传递" class="headerlink" title="系统调用参数传递"></a>系统调用参数传递</h3><p>参数依次存放在寄存器<code>eax</code>、<code>ebx</code>、<code>ecx</code>、<code>edx</code>、<code>esi</code>中，当系统调用的参数大于5个时（因为上面5个寄存器用完了），执行<code>int 0x80</code>执行仍需将系统调用功能号保存在<code>eax</code>中，所不同的只是参数应该依次存放在一块连续的内存区域内，同时在寄存器<code>eax</code>中保存指向该内存区域的指针。系统调用完成后，返回值仍将保存在寄存器<code>eax</code>中。由于只是需要一块连续的内存区域来保存系统调用的参数，因此可以完全像普通函数调用一样使用栈（Stack）来传递系统调用所需的参数。但是，注意参数以相反的顺序进栈，先进后出，即应该最后一个参数先进栈，第一个参数最后进栈。如果采用栈来传递系统调用所需要的参数，在执行<code>int $0x80</code>指令时还应该将栈指针的当前值复制到寄存器<code>ebx</code>中。</p>
+        <script src="\assets\js\APlayer.min.js"> </script><h3 id="系统调用基本原理"><a href="#系统调用基本原理" class="headerlink" title="系统调用基本原理"></a>系统调用基本原理</h3><p>系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。<br>在i386体系中，Linux系统调用接口是通过软中断指令<code>int 0x80</code>使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令<code>int 0x80</code>的时候，这个指令会发生一个中断向量码为128的中断请求，并在响应过程中将进程从用户态切换为内核态。<br>通过软中断<code>0x80</code>，系统会跳转到一个预设好的内核空间地址，它指向了系统调用处理程序，即在entry.S文件中的system_call函数。也就是，所有的系统调用都会统一跳转到这个地址执行system_call()函数。<br>因为Linux只允许系统调用接口使用128这一个中断向量，并在中断号为128的中断服务例程中，调用不同调用不同的内核服务例程，所以，系统调用接口除了要引发<code>int 0x80</code>软中断外，为了进入内河后调用不同的内核服务例程，还需要提供识别内核服务例程的参数，称之为“系统调用号”。<br>每个系统调用都有对应的系统调用号，同时内核中有一个system_call_table数组，它是个函数指针数组，每个函数指针都指向了系统调用的服务例程，下标就是该内核服务例程的系统调用号，用以指明到底执行哪个系统调用。当<code>int 0x80</code>软中断执行时，系统调用号会放入<code>eax</code>寄存器中，system_call函数可以读取<code>eax</code>寄存器获得系统调用号，将其乘以4得到偏移地址，以sys_call_table为基地址，基地址加上偏移地址就是应该执行的系统调用服务例程（内核服务例程）的地址。</p>
+<h3 id="系统调用参数传递"><a href="#系统调用参数传递" class="headerlink" title="系统调用参数传递"></a>系统调用参数传递</h3><p>参数依次存放在寄存器<code>eax</code>、<code>ebx</code>、<code>ecx</code>、<code>edx</code>、<code>esi</code>中，当系统调用的参数大于5个时（因为上面5个寄存器用完了），执行<code>int 0x80</code>执行仍需将系统调用功能号保存在<code>eax</code>中，所不同的只是参数应该依次存放在一块连续的内存区域内，同时在寄存器<code>eax</code>中保存指向该内存区域的指针。<br>系统调用完成后，返回值仍将保存在寄存器<code>eax</code>中。由于只是需要一块连续的内存区域来保存系统调用的参数，因此可以完全像普通函数调用一样使用栈（Stack）来传递系统调用所需的参数。但是，注意参数以相反的顺序进栈，先进后出，即应该最后一个参数先进栈，第一个参数最后进栈。如果采用栈来传递系统调用所需要的参数，在执行<code>int $0x80</code>指令时还应该将栈指针的当前值复制到寄存器<code>ebx</code>中。</p>
 
       
     </div>
@@ -511,9 +507,9 @@
           
             <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/中断/" rel="tag"># 中断</a>
-          
             <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
+          
+            <a href="/tags/中断/" rel="tag"># 中断</a>
           
         </div>
       
@@ -526,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/22/Linux内核：增加系统调用/" rel="next" title="Linux内核：增加系统调用">
-                <i class="fa fa-chevron-left"></i> Linux内核：增加系统调用
+              <a href="/2018/03/02/内核编译错误/" rel="next" title="ubuntu make menuconfig error">
+                <i class="fa fa-chevron-left"></i> ubuntu make menuconfig error
               </a>
             
           </div>
@@ -535,6 +531,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/22/Linux内核：增加系统调用/" rel="prev" title="Linux内核：增加系统调用">
+                Linux内核：增加系统调用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>

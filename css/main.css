@@ -185,7 +185,7 @@ th {
 }
 body {
   position: relative;
-  font-family: "Times New Roman", "华文中宋", "Microsoft YaHei", Verdana, sans-serif;
+  font-family: "PT Serif", "Microsoft Yahei", "Times New Roman" "Microsoft YaHei", Verdana, sans-serif;
   font-size: 16px;
   line-height: 2;
   color: #555;
@@ -216,7 +216,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: "华文中宋", "Times New Roman", Georgia, sans;
+  font-family: "PT Serif", "Microsoft Yahei", "Times New Roman", Georgia, sans;
 }
 h2,
 h3,
@@ -2071,7 +2071,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #1616ff;
+  background: #62fcff;
 }
 .links-of-blogroll {
   font-size: 13px;

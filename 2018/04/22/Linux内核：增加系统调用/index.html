@@ -103,7 +103,7 @@
 
 
 
-  <meta name="keywords" content="Linux,系统调用,内核," />
+  <meta name="keywords" content="Linux,内核,系统调用," />
 
 
 
@@ -117,7 +117,7 @@
 
 
 <meta name="description" content="系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤：  下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在ker">
-<meta name="keywords" content="Linux,系统调用,内核">
+<meta name="keywords" content="Linux,内核,系统调用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核：增加系统调用">
 <meta property="og:url" content="http://www.yuhongwa.com/2018/04/22/Linux内核：增加系统调用/index.html">
@@ -538,9 +538,9 @@
           
             <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
-          
             <a href="/tags/内核/" rel="tag"># 内核</a>
+          
+            <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
           
         </div>
       
@@ -968,6 +968,17 @@ var jiathis_config={
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

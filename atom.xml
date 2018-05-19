@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Solanine</title>
+  <title>Solanine&#39;s Blog</title>
   
-  <subtitle>Solanine&#39;s blog</subtitle>
+  <subtitle>Solanine</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yuhongwa.com/"/>
@@ -70,9 +70,9 @@
     
       <category term="Linux" scheme="http://www.yuhongwa.com/tags/Linux/"/>
     
-      <category term="中断" scheme="http://www.yuhongwa.com/tags/%E4%B8%AD%E6%96%AD/"/>
-    
       <category term="系统调用" scheme="http://www.yuhongwa.com/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
+    
+      <category term="中断" scheme="http://www.yuhongwa.com/tags/%E4%B8%AD%E6%96%AD/"/>
     
   </entry>
   
@@ -99,9 +99,9 @@
     
       <category term="Linux" scheme="http://www.yuhongwa.com/tags/Linux/"/>
     
-      <category term="系统调用" scheme="http://www.yuhongwa.com/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
-    
       <category term="内核" scheme="http://www.yuhongwa.com/tags/%E5%86%85%E6%A0%B8/"/>
+    
+      <category term="系统调用" scheme="http://www.yuhongwa.com/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/"/>
     
   </entry>
   

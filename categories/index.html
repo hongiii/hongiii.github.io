@@ -108,8 +108,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="Solanine" type="application/atom+xml" />
 
@@ -708,6 +706,22 @@
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+		var gitalk = new Gitalk({
+		  clientID: '64d5f53e080d1f0764a2',
+		  clientSecret: 'e43ebe7f1fc18c05ac000116a619a31fb948845b',
+		  repo: 'hongiii.github.io',
+		  owner: 'hongiii',
+		  admin: ['hongiii'], 
+		  id: location.pathname,
+		  distractionFreeMode: 'true'
+		})
+		gitalk.render('gitalk-container')           
+       </script>
 
   
 

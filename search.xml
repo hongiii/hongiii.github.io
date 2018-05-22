@@ -10,7 +10,7 @@
       <tags>
         <tag>腾讯</tag>
         <tag>实习</tag>
-        <tag>C++</tag>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -22,7 +22,7 @@
       </categories>
       <tags>
         <tag>实习</tag>
-        <tag>C++</tag>
+        <tag>c++</tag>
         <tag>爱奇艺</tag>
         <tag>春招</tag>
       </tags>
@@ -35,7 +35,7 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
+        <tag>linux</tag>
         <tag>系统调用</tag>
         <tag>中断</tag>
       </tags>
@@ -48,7 +48,7 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
+        <tag>linux</tag>
         <tag>内核</tag>
         <tag>系统调用</tag>
       </tags>
@@ -61,8 +61,8 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
-        <tag>Ubuntu</tag>
+        <tag>linux</tag>
+        <tag>ubuntu</tag>
         <tag>内核编译</tag>
       </tags>
   </entry>

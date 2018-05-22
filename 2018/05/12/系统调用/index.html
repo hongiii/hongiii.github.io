@@ -103,7 +103,7 @@
 
 
 
-  <meta name="keywords" content="Linux,系统调用,中断," />
+  <meta name="keywords" content="linux,系统调用,中断," />
 
 
 
@@ -117,14 +117,14 @@
 
 
 <meta name="description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80的">
-<meta name="keywords" content="Linux,系统调用,中断">
+<meta name="keywords" content="linux,系统调用,中断">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux系统调用">
 <meta property="og:url" content="http://www.yuhongwa.com/2018/05/12/系统调用/index.html">
 <meta property="og:site_name" content="Solanine">
 <meta property="og:description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-13T04:32:14.540Z">
+<meta property="og:updated_time" content="2018-05-22T09:13:09.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux系统调用">
 <meta name="twitter:description" content="系统调用基本原理系统调用其实就是函数调用，区别是调用内核态的函数。但是用户态到内核态不是随意切换的，所以通过系统调用接口实现用户态到内核态的切换，在保护机制的计算机系统中，用户必须通过软件中断或陷入的方式使进程从用户态切换为内核态。在i386体系中，Linux系统调用接口是通过软中断指令int 0x80使进程从用户态进入内核态的，这个过程也叫“陷入”。系统调用接口调用软中断指令int 0x80的">
@@ -507,7 +507,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
             <a href="/tags/系统调用/" rel="tag"># 系统调用</a>
           
@@ -962,14 +962,13 @@ var jiathis_config={
 
 
 
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="/css/gitalk.css">
+<script src="/js/src/gitalk.min.js"></script>
    <script type="text/javascript">
 		var gitalk = new Gitalk({
 		  clientID: '64d5f53e080d1f0764a2',
 		  clientSecret: 'e43ebe7f1fc18c05ac000116a619a31fb948845b',
-		  repo: 'hongiii.github.io',
+		  repo: 'gitalkTest',
 		  owner: 'hongiii',
 		  admin: ['hongiii'], 
 		  id: location.pathname,

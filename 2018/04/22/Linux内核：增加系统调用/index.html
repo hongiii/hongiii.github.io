@@ -103,7 +103,7 @@
 
 
 
-  <meta name="keywords" content="Linux,内核,系统调用," />
+  <meta name="keywords" content="linux,内核,系统调用," />
 
 
 
@@ -117,7 +117,7 @@
 
 
 <meta name="description" content="系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤：  下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在ker">
-<meta name="keywords" content="Linux,内核,系统调用">
+<meta name="keywords" content="linux,内核,系统调用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核：增加系统调用">
 <meta property="og:url" content="http://www.yuhongwa.com/2018/04/22/Linux内核：增加系统调用/index.html">
@@ -131,7 +131,7 @@
 <meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/n5.PNG?raw=true">
 <meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/N6.PNG?raw=true">
 <meta property="og:image" content="https://github.com/hongiii/mdPic/blob/master/aboutBlog/linux%E5%86%85%E6%A0%B8%EF%BC%9A%E5%A2%9E%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/N7.PNG?raw=true">
-<meta property="og:updated_time" content="2018-04-23T09:40:11.646Z">
+<meta property="og:updated_time" content="2018-05-22T09:13:17.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核：增加系统调用">
 <meta name="twitter:description" content="系统调用是操作系统为用户态进程与硬件及内核资源进行交互提供的一组接口。本文主要介绍如何在VMWare虚拟机下向Linux内核增加系统调用，并进行简单测试的过程。对于不同的内核版本，实现方式略有不同，这里使用的是内核4.6.3。主要有以下6个步骤：  下载并解压内核、生成.config配置文件 在arch/x86/entry/syscalls/syscall_64.tbl中添加系统调用号 在ker">
@@ -536,7 +536,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
             <a href="/tags/内核/" rel="tag"># 内核</a>
           
@@ -991,14 +991,13 @@ var jiathis_config={
 
 
 
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <link rel="stylesheet" href="/css/gitalk.css">
+<script src="/js/src/gitalk.min.js"></script>
    <script type="text/javascript">
 		var gitalk = new Gitalk({
 		  clientID: '64d5f53e080d1f0764a2',
 		  clientSecret: 'e43ebe7f1fc18c05ac000116a619a31fb948845b',
-		  repo: 'hongiii.github.io',
+		  repo: 'gitalkTest',
 		  owner: 'hongiii',
 		  admin: ['hongiii'], 
 		  id: location.pathname,
